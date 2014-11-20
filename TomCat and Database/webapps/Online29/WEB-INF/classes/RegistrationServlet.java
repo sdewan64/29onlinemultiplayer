@@ -47,7 +47,7 @@ public class RegistrationServlet extends HttpServlet {
         }
         
         
-        ConnectDatabase db = new ConnectDatabase();
+        DatabaseHandler db = new DatabaseHandler();
         
         conn = db.makeConnection();
         try {
@@ -79,22 +79,8 @@ public class RegistrationServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json.toString());
         
-        //closing mysql connection
-        if(stmt != null){
-            try {
-                stmt.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(RegistrationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        if(conn != null){
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(RegistrationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        //closing mysql connection (now done in DatanaseHandler class)
+        db.closeAllConnections(conn, stmt);
         
     }
     

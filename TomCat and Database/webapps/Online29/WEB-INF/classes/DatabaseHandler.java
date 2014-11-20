@@ -2,6 +2,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Shaheed
  */
-public class ConnectDatabase {
+public class DatabaseHandler {
     private final String DATABASE_URL = "jdbc:mysql://localhost/base29";
     private final String DATABASE_USER = "root";
     private final String DATABASE_PASSWORD = "";
@@ -25,7 +26,7 @@ public class ConnectDatabase {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConnectDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try{
@@ -36,6 +37,24 @@ public class ConnectDatabase {
         }
          
         return conn;
+    }
+    
+    public void closeAllConnections(Connection connection,Statement stmt){
+        if(stmt != null){
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if(connection != null){
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
         
 }
