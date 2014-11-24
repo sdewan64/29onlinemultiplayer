@@ -1,28 +1,35 @@
 package com.shaheed.online29;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 
-public class StartActivity extends Activity {
+public class AccountMenu extends Activity {
 
+    private TextView textViewUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_account_menu);
+        findViewsById();
+
+        //setting username
+        textViewUserName.setText(Variables.username);
     }
+
+    private void findViewsById() {
+        textViewUserName = (TextView) findViewById(R.id.textviewUsername);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.start, menu);
+        getMenuInflater().inflate(R.menu.account_menu, menu);
         return true;
     }
 
@@ -36,24 +43,5 @@ public class StartActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void registrationButtonClicked(View view){
-        Intent in = new Intent(this, RegistrationActivity.class);
-        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(in);
-        finish();
-    }
-
-    public void quitButtonClicked(View view){
-        finish();
-        System.exit(0);
-    }
-
-    public void loginButtonClicked(View view){
-        Intent in = new Intent(this, LoginActivity.class);
-        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(in);
-        finish();
     }
 }

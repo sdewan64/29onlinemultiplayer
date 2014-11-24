@@ -26,7 +26,8 @@
         android:text="Login to Existing Account"
         android:id="@+id/loginButton"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="loginButtonClicked"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -45,5 +46,6 @@
         android:id="@+id/quitButton"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/loginButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="quitButtonClicked"/>
 </RelativeLayout>

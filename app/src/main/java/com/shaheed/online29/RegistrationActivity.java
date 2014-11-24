@@ -1,6 +1,7 @@
 package com.shaheed.online29;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,14 +23,14 @@ import java.util.List;
 
 public class RegistrationActivity extends Activity {
 
-    Button registerButton,backButton;
-    EditText nameText,emailText,passText;
-    TextView statusText;
+    private Button registerButton,backButton;
+    private EditText nameText,emailText,passText;
+    private TextView statusText;
 
     private boolean isValid;
 
-    JsonParser jsonParser = new JsonParser();
-    JSONObject jsonObject;
+    private JsonParser jsonParser = new JsonParser();
+    private JSONObject jsonObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,10 @@ public class RegistrationActivity extends Activity {
 
         findViewsById();
 
+        implementButtons();
+    }
+
+    private void implementButtons() {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,10 +55,20 @@ public class RegistrationActivity extends Activity {
 
                 if(isValid){
 
-                   new RegisterUserToDatabase().execute(nameText.getText().toString(),emailText.getText().toString(),passText.getText().toString());
+                    new RegisterUserToDatabase().execute(nameText.getText().toString(),emailText.getText().toString(),passText.getText().toString());
 
                 }
 
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getApplicationContext(), StartActivity.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+                finish();
             }
         });
     }
@@ -99,12 +114,12 @@ public class RegistrationActivity extends Activity {
             String email = strings[1];
             String password = strings[2];
 
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("name",name));
-            params.add(new BasicNameValuePair("email",email));
-            params.add(new BasicNameValuePair("password",password));
+            List<NameValuePair> registrationInfo = new ArrayList<NameValuePair>();
+            registrationInfo.add(new BasicNameValuePair("name", name));
+            registrationInfo.add(new BasicNameValuePair("email", email));
+            registrationInfo.add(new BasicNameValuePair("password", password));
 
-            jsonObject = jsonParser.makeHTTPRequest(Constants.URL_REGISTRATION,"GET",params);
+            jsonObject = jsonParser.makeHTTPRequest(Constants.URL_REGISTRATION,"GET",registrationInfo);
 
             String reply = null;
 
@@ -124,7 +139,10 @@ public class RegistrationActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if(isDone) statusText.setVisibility(View.VISIBLE);
+            if(isDone) {
+                statusText.setText(R.string.RegistrationComplete);
+                statusText.setVisibility(View.VISIBLE);
+            }
             else{
                 statusText.setText("Something went wrong.Registration Incomplete.\nNote that only 1 account is allowed per email address");
                 statusText.setVisibility(View.VISIBLE);

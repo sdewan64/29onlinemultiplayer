@@ -6,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="headerTitle">29 - Online</string>
     <string name="RegistrationComplete">You have successfully registered</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_account_menu">AccountMenu</string>
 
 </resources>

@@ -56,5 +56,16 @@ public class DatabaseHandler {
             }
         }
     }
+    
+    public void closeAllConnections(Connection connection){
+        
+        if(connection != null){
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
         
 }

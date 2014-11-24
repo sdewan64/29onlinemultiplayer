@@ -13,22 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/headerTitle"
-        android:id="@+id/textView"
+        android:id="@+id/textviewStatus"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="25dp"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/textEmail"
-        android:hint="Email Address"
-        android:layout_above="@+id/textPassword"
-        android:layout_alignLeft="@+id/textPassword"
-        android:layout_alignStart="@+id/textPassword" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -40,7 +29,19 @@
         android:layout_above="@+id/textEmail"
         android:layout_alignLeft="@+id/textEmail"
         android:layout_alignStart="@+id/textEmail"
-        android:focusable="true"/>
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/textEmail"
+        android:hint="Email Address"
+        android:layout_above="@+id/textPassword"
+        android:layout_alignLeft="@+id/textPassword"
+        android:layout_alignStart="@+id/textPassword"
+        />
 
     <EditText
         android:layout_width="wrap_content"
@@ -57,7 +58,7 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/buttonRegister"
-        android:layout_toStartOf="@+id/textView"
+        android:layout_toStartOf="@+id/textviewStatus"
         android:layout_below="@+id/textPassword"
         android:layout_alignLeft="@+id/textPassword"
         android:layout_alignStart="@+id/textPassword"
