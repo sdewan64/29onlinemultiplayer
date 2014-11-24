@@ -52,26 +52,23 @@ public class RegistrationServlet extends HttpServlet {
         conn = db.makeConnection();
         try {
             stmt = conn.createStatement();
+            
+            //params[0]=password,params[1]=name,params[2]=email
+            String query = "INSERT INTO user (name,email,password) VALUES (\""+params[1]+"\",\""+params[2]+"\",\""+params[0]+"\")";
+            //System.out.println(query);
+        
+            int updatedRows = stmt.executeUpdate(query);
+            if(updatedRows == 1){
+                json.put("reply", "done");
+            }else{
+                json.put("reply", "undone");
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(RegistrationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //params[0]=password,params[1]=name,params[2]=email
-        String query = "INSERT INTO user (name,email,password) VALUES (\""+params[1]+"\",\""+params[2]+"\",\""+params[0]+"\")";
-        //System.out.println(query);
         
-        int updatedRows = 0;
-        try {
-            updatedRows = stmt.executeUpdate(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(RegistrationServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        if(updatedRows == 1){
-            json.put("reply", "done");
-        }else{
-            json.put("reply", "undone");
-        }
         //System.out.println(updatedRows);
         //System.out.println(json);
         
