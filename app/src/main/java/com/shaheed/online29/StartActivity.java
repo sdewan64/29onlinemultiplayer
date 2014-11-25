@@ -11,12 +11,52 @@ import android.widget.Button;
 
 
 public class StartActivity extends Activity {
-
+    private Activity selfActivity;
+    private Button buttonRegister,buttonLogin,buttonQuit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        selfActivity = this;
+
+        findViewsById();
+        implementButtons();
+    }
+
+    private void findViewsById() {
+        buttonRegister = (Button) findViewById(R.id.registerButton);
+        buttonLogin = (Button) findViewById(R.id.loginButton);
+        buttonQuit = (Button) findViewById(R.id.quitButton);
+    }
+
+    private void implementButtons() {
+        buttonQuit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Constants.quitButton(selfActivity);
+            }
+        });
+
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(selfActivity, RegistrationActivity.class);
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+                finish();
+            }
+        });
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(selfActivity, LoginActivity.class);
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -36,24 +76,5 @@ public class StartActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void registrationButtonClicked(View view){
-        Intent in = new Intent(this, RegistrationActivity.class);
-        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(in);
-        finish();
-    }
-
-    public void quitButtonClicked(View view){
-        finish();
-        System.exit(0);
-    }
-
-    public void loginButtonClicked(View view){
-        Intent in = new Intent(this, LoginActivity.class);
-        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(in);
-        finish();
     }
 }
