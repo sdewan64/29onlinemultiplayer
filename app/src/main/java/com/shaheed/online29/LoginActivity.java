@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,7 +52,7 @@ public class LoginActivity extends Activity {
         loginButton = (Button) findViewById(R.id.buttonLogin);
         emailBox = (EditText) findViewById(R.id.edittextEmail);
         passwordBox = (EditText) findViewById(R.id.edittextPassword);
-        statusText = (TextView) findViewById(R.id.textviewStatus);
+        statusText = (TextView) findViewById(R.id.textviewStatusX);
     }
 
 
@@ -94,7 +93,7 @@ public class LoginActivity extends Activity {
             loginInfo.add(new BasicNameValuePair("email", email));
             loginInfo.add(new BasicNameValuePair("password", password));
 
-            jsonObject = jsonParser.makeHTTPRequest(Constants.URL_LOGIN,"GET",loginInfo);
+            jsonObject = jsonParser.makeHTTPRequest(Constants.URL_LOGIN,Constants.METHOD_GET,loginInfo);
             String reply = null;
 
             try{
@@ -102,7 +101,7 @@ public class LoginActivity extends Activity {
 
                 if(reply.equals("done")){
                     isDone = true;
-                    Variables.username = jsonObject.getString("username");
+                    Constants.username = jsonObject.getString("username");
                 }else{
                     replyMsg = reply;
                 }

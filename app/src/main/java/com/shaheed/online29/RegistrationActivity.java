@@ -119,7 +119,7 @@ public class RegistrationActivity extends Activity {
             registrationInfo.add(new BasicNameValuePair("email", email));
             registrationInfo.add(new BasicNameValuePair("password", password));
 
-            jsonObject = jsonParser.makeHTTPRequest(Constants.URL_REGISTRATION,"GET",registrationInfo);
+            jsonObject = jsonParser.makeHTTPRequest(Constants.URL_REGISTRATION,Constants.METHOD_GET,registrationInfo);
 
             String reply = null;
 
