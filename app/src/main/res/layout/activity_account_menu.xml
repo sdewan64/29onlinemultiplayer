@@ -27,4 +27,50 @@
         android:layout_marginTop="40dp"
         android:layout_below="@+id/headerText"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create A New Game"
+        android:id="@+id/buttonCreateNewGame"
+        android:layout_above="@+id/buttonEnterCreatedGame"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Already Created Game"
+        android:id="@+id/buttonEnterCreatedGame"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/buttonCreateNewGame"
+        android:layout_alignEnd="@+id/buttonCreateNewGame"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quit"
+        android:id="@+id/buttonQuit"
+        android:layout_below="@+id/buttonEnterCreatedGame"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/buttonEnterCreatedGame"
+        android:layout_alignEnd="@+id/buttonEnterCreatedGame" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Game creation was successful.\nRedirecting to Game.\nPlease wait..."
+        android:id="@+id/textViewStatus"
+        android:layout_below="@+id/buttonQuit"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible"
+        android:gravity="center"/>
+
 </RelativeLayout>

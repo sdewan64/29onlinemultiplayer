@@ -8,5 +8,6 @@
     <string name="RegistrationComplete">You have successfully registered</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_account_menu">AccountMenu</string>
+    <string name="title_activity_game_list">GameList</string>
 
 </resources>

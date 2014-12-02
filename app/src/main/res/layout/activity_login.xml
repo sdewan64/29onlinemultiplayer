@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Error Msg if any"
-        android:id="@+id/textviewStatus"
+        android:id="@+id/textviewStatusX"
         android:layout_below="@+id/buttonLogin"
         android:layout_marginTop="25dp"
         android:textColor="@android:color/holo_red_light"
