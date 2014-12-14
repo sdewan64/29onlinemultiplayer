@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2014 at 01:52 PM
+-- Generation Time: Dec 14, 2014 at 10:50 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -41,8 +41,18 @@ CREATE TABLE IF NOT EXISTS `game` (
   `bet` int(2) NOT NULL DEFAULT '15',
   `bettingteam` int(1) NOT NULL DEFAULT '0',
   `responsecount` int(1) NOT NULL DEFAULT '0',
-  `playercount` int(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  `playercount` int(1) NOT NULL DEFAULT '1',
+  `nextactionuserid` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Dumping data for table `game`
+--
+
+INSERT INTO `game` (`id`, `hoster`, `nameplayer1`, `nameplayer2`, `nameplayer3`, `nameplayer4`, `turn`, `scoreteam1`, `scoreteam2`, `tempscoreteam1`, `tempscoreteam2`, `bet`, `bettingteam`, `responsecount`, `playercount`, `nextactionuserid`) VALUES
+(13, 'sagar', 'sagar', 'sagar', 'sagar', 'aaa', 1, 0, 0, 0, 0, 15, 0, 0, 4, 1),
+(14, 'new', 'new', 'sagar', 'None joined yet', 'None joined yet', 0, 0, 0, 0, 0, 15, 0, 0, 2, 0),
+(15, 'sagar', 'sagar', 'new', 'new', 'aaa', 1, 0, 0, 0, 0, 15, 0, 0, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -55,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `user`
@@ -67,7 +77,8 @@ INSERT INTO `user` (`id`, `name`, `email`, `password`) VALUES
 (9, 'asd', 'a@a.com', '111'),
 (11, 'sagar', 'asd', 'asd'),
 (13, 'sss', 'asdaa', 'asd'),
-(16, 'new', 'nnn', 'new');
+(16, 'new', 'nnn', 'new'),
+(17, 'aaa', 'aaaaaa', 'a');
 
 --
 -- Indexes for dumped tables
@@ -93,12 +104,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-MODIFY `id` int(12) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `id` int(12) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
