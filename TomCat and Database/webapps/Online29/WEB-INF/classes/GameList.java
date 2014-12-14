@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -23,63 +21,72 @@ import org.json.simple.JSONObject;
  *
  * @author Shaheed
  */
-public class LoginServlet extends HttpServlet {
+public class GameList extends HttpServlet {
 
     private Connection conn = null;
-
+    JSONObject json = new JSONObject();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        JSONObject json = new JSONObject();
-
-        Enumeration paramNames = request.getParameterNames();
-        String params[] = new String[2];
-        int i = 0;
-        while(paramNames.hasMoreElements()){
-            String paramName = (String) paramNames.nextElement();
-            //System.out.println("ParamName : " +paramName);
-
-            String[] paramValues = request.getParameterValues(paramName);
-            params[i] = paramValues[0];
-            //System.out.println("ParamValue : " +params[i]);
-
-            i++;
-        }
-
-        //System.out.println("param0: "+params[0]+" param1: "+params[1]);
-        //params 0 -> password & params 1 -> email
-
+        //no get post required
+        
         DatabaseHandler db = new DatabaseHandler();
-
+        
         conn = db.makeConnection();
         
-        String query = "SELECT name FROM user WHERE email=? AND password=?";
+        String[][] gameList = new String[3][2];
+        gameList[0][0] = "null";
+        gameList[0][1] = "null";
+        gameList[1][0] = "null";
+        gameList[1][1] = "null";
+        gameList[2][0] = "null";
+        gameList[2][1] = "null";
+        
+        String query = "SELECT id,hoster,playercount FROM game";
+        
         try {
             PreparedStatement prStmt = conn.prepareStatement(query);
-            prStmt.setString(1, params[1]);
-            prStmt.setString(2, params[0]);
             ResultSet rs = prStmt.executeQuery();
-            if(rs.next()){
-                json.put("reply", "done");
-                json.put("username", rs.getString("name"));
-                //System.out.println(rs.getString("name"));
-            }else{
-                json.put("reply", "Invalid email/password!");
-                json.put("username", "Invalid User");
+            
+            int i = 0;
+            
+            while(rs.next()){
+                if(Integer.parseInt(rs.getString("playercount"))<4){
+                    //first hoster then id
+                    gameList[i][0] = rs.getString("hoster");
+                    gameList[i][1] = rs.getString("id");
+                    i++;
+                    if(i==3) break;
+                }
             }
             
+            if(i==0){
+                json.put("reply", "nogamefound");
+                //System.out.println("nogamefound");
+            }else{
+                json.put("reply", "gamefound");
+                //System.out.println("gamefound");
+            }
+            
+            for(i=0;i<3;i++){
+                //gameHost0->hoster & gameId0->1
+                json.put("gameHost"+String.valueOf(i) , gameList[i][0]);
+                json.put("gameId"+String.valueOf(i) , gameList[i][1]);
+                //System.out.println("gamehost: "+gameList[i][0]+" gameId: "+gameList[i][1]);
+            }
+            
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json.toString());
+            
         } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GameList.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         
         //System.out.println(json);
         
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json.toString());
-        
         db.closeAllConnections(conn);
-
+               
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -110,5 +117,15 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
 }
