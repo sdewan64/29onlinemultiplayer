@@ -6,14 +6,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.shaheed.online29.GameList"
+    tools:context="com.shaheed.online29.GameListActivity"
     >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/headerTitle"
-        android:id="@+id/textView"
+        android:id="@+id/joingameTextviewStatus"
         android:textStyle="bold"
         android:textSize="25dp"
         android:layout_alignParentTop="true"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Available Games (Tap to Join)"
         android:id="@+id/textviewStatusX"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/joingameTextviewStatus"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp" />
 

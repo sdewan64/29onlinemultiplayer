@@ -120,7 +120,7 @@ public class LoginActivity extends Activity {
 
                 //user found redirect to account menu
 
-                Intent in = new Intent(getApplicationContext(), AccountMenu.class);
+                Intent in = new Intent(getApplicationContext(), AccountMenuActivity.class);
                 in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(in);
                 finish();
